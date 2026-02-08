@@ -20,7 +20,7 @@
   - GROQ_API_KEY
 
 ## Despliegue
-1)
+1) Actualiza variable de entorno:
 ```
 export GROQ_API_KEY=Reemplaza_tu_API_KEY
 ```
@@ -60,3 +60,4 @@ Crea una web responsiva con estas funcionalidades:
 ## Elementos adicionales
 - La web debe ser parecida a la de ChatGPT
 """
+
