@@ -1,0 +1,118 @@
+{
+  "info": {
+    "name": "Agente IA Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Coleccion para probar el backend agente-ia"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://your-api-id.execute-api.us-east-1.amazonaws.com/dev"
+    },
+    {
+      "key": "chatId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Crear chat",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const data = pm.response.json();",
+              "if (data && data.chatId) {",
+              "  pm.collectionVariables.set('chatId', data.chatId);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Chat de prueba\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/chats",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chats"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar chats",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/chats",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chats"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Obtener chat",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/chats/{{chatId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chats",
+            "{{chatId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Enviar mensaje",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"prompt\": \"Hola, necesito un resumen del historial\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/chats/{{chatId}}/messages",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chats",
+            "{{chatId}}",
+            "messages"
+          ]
+        }
+      }
+    }
+  ]
+}
